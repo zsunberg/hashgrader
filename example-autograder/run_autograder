@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+
+from hashgrader import grade
+
+grade(assignment="hw1", key="secret%passcode")
