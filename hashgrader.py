@@ -2,7 +2,7 @@ import os, json
 import hashlib
 from glob import iglob
 
-def grade(assignment, key, autopoints=100, fullscore=100):
+def grade(assignment, key, autopoints=100, fullscore=100, scorestring=str):
     try:
         json_files = [pos_json for pos_json in iglob(os.path.join('submission', '**', '*.json'), recursive=True)]
     
@@ -22,7 +22,8 @@ def grade(assignment, key, autopoints=100, fullscore=100):
         assert sub['assignment'] == assignment, 'Submission from wrong homework (got {}, expected {}).'.format(sub['assignment'], assignment)
     
         m = hashlib.sha256()
-        m.update((str(sub['assignment'])+str(me)+str(sub["score"])+str(key)).encode('utf-8'))
+        score_str = scorestring(sub['score'])
+        m.update((str(sub['assignment'])+str(me)+score_str+str(key)).encode('utf-8'))
         assert m.hexdigest() == sub['hash'], "Hash mismatch! If you think you submitted a valid json file, report this to the course staff."
     
         points = round(max(0, min(autopoints, autopoints*sub['score']/fullscore)), 1)
