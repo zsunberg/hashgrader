@@ -17,7 +17,7 @@ def grade(assignment, key, autopoints=100, fullscore=100, scorestring=str):
     
         me = meta['users'][0]['email']
         se = sub['email']
-        assert me == se, 'Gradescope email ({}) and submission email ({}) did not match!'.format(me, se)
+        assert me.lower() == se.lower(), 'Gradescope email ({}) and submission email ({}) did not match!'.format(me, se)
     
         assert sub['assignment'] == assignment, 'Submission from wrong homework (got {}, expected {}).'.format(sub['assignment'], assignment)
     
