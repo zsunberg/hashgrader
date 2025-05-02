@@ -1,3 +1,5 @@
+# This is hashgrader! https://github.com/zsunberg/hashgrader/
+
 import os, json
 import hashlib
 from glob import iglob
